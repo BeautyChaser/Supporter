@@ -1,0 +1,20 @@
+module.exports={
+  appId:'io.github.beautychaser.supporter',productName:'Supporter',asar:true,
+  electronDist:'node_modules/electron/dist',
+  directories:{output:'release',buildResources:'build'},
+  files:[
+    'package.json','desktop/main.cjs','desktop/preload.cjs','desktop/runtime-paths.cjs','desktop/glass.cjs',
+    'desktop/placement.cjs','desktop/motion.cjs','desktop/settings-window.cjs','desktop/completion-store.cjs',
+    'desktop/index.html','desktop/renderer.js','desktop/style.css','desktop/command-data.js','desktop/completion.js',
+    'desktop/settings.html','desktop/settings.js','desktop/settings.css',
+    'desktop/onboarding.html','desktop/onboarding.js','desktop/onboarding.css','desktop/tray.png'
+  ],
+  extraResources:[{from:'build/payload',to:'supporter',filter:['**/*']}],
+  win:{target:[{target:'nsis',arch:['x64']},{target:'zip',arch:['x64']}],icon:'build/icon.ico'},
+  artifactName:'Supporter-${version}-${arch}.${ext}',
+  nsis:{oneClick:false,perMachine:false,allowToChangeInstallationDirectory:true,
+    createDesktopShortcut:true,createStartMenuShortcut:true,shortcutName:'Supporter',
+    deleteAppDataOnUninstall:false,runAfterFinish:true,
+    artifactName:'Supporter-${version}-Setup-${arch}.${ext}'},
+  publish:null
+};

@@ -1,0 +1,10 @@
+{
+  "backend": "codex",
+  "models": {},
+  "reasoning": {},
+  "environment": "auto",
+  "appearance": {"theme": "system", "accent": "#b9b5ff", "fontSize": 14, "width": 520, "opacity": 1, "radius": 16, "showProcess": true, "motion": true, "glass": true, "glassOpacity": 0.8},
+  "general": {"hotkey": "Control+Space", "autoStart": false},
+  "codexConnection": {"mode": "inherit", "proxyUrl": ""},
+  "onboarding": {"completed": false}
+}

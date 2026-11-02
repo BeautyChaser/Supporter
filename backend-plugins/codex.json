@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "codex",
+  "label": "Codex",
+  "adapter": "codex",
+  "priority": 10,
+  "detect": {
+    "commands": ["codex.exe", "codex", "codex.cmd"],
+    "pathGlobs": ["%LOCALAPPDATA%/OpenAI/Codex/bin/*/codex.exe"],
+    "versionArgs": ["--version"],
+    "selection": "newest"
+  }
+}

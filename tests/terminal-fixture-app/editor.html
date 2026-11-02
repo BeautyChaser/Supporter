@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Supporter terminal metadata fixture</title></head>
+<body style="margin:0;background:#20242d;color:#ddd;font:16px Segoe UI">
+<p>本地终端光标与多行内容测试；不连接真实 shell。</p>
+<textarea aria-label="普通多行编辑框" id="plain" style="position:absolute;left:100px;top:100px;width:450px;height:100px">第一行
+第二行
+
+第四行</textarea>
+<div contenteditable="true" role="textbox" aria-label="富文本多行编辑框" id="rich" style="position:absolute;left:100px;top:240px;width:450px;height:100px;border:1px solid #777">富文本原文</div>
+<p id="reference" tabindex="0" aria-label="只读参考">这是网页只读文字</p>
+<div class="xterm terminal-instance" style="position:absolute;left:300px;top:400px;width:500px;height:150px;border:1px solid #777">
+<span style="position:absolute;left:200px;top:40px">▯</span>
+<textarea id="cell" aria-label="Terminal input" class="xterm-helper-textarea" style="position:absolute;left:200px;top:40px;width:9px;height:22px;padding:0;border:0;opacity:0"></textarea>
+</div></body></html>

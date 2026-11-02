@@ -1,0 +1,20 @@
+{
+  "name": "supporter",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Keyboard-first inline assistant for Windows",
+  "main": "desktop/main.cjs",
+  "author": "BeautyChaser",
+  "homepage": "https://github.com/BeautyChaser/Supporter",
+  "repository": {"type": "git", "url": "https://github.com/BeautyChaser/Supporter.git"},
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check desktop/main.cjs && node --check desktop/renderer.js && node --check desktop/settings.js && node --check desktop/onboarding.js",
+    "dist:win": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows.ps1",
+    "dist:dir": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows.ps1 -DirectoryOnly"
+  },
+  "devDependencies": {
+    "electron": "^45.2.1",
+    "electron-builder": "26.18.0"
+  }
+}

@@ -1,0 +1,10 @@
+const environments=[
+  ['auto','自动识别输出环境'],['bash','Linux / Bash 命令与脚本'],
+  ['powershell','PowerShell 语法与终端约束'],['cmd','Windows cmd.exe 命令'],
+  ['markdown','保留 Markdown 格式与多行'],['text','普通文本与段落'],['code','代码、缩进与多行']
+];
+function parseColon(value){
+  const m=/^\/(env|model|backend|reasoning|tool|loc):([^\n]*)$/i.exec(value);
+  return m?{kind:m[1].toLowerCase()==='env'?'env':m[1].toLowerCase(),prefix:'/'+m[1].toLowerCase()+':',query:m[2]}:null;
+}
+module.exports={environments,parseColon};

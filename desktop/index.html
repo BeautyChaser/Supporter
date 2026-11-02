@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Supporter</title><link rel="stylesheet" href="style.css"></head>
+<body><main id="card">
+  <header><div class="brand"><span class="spark">✦</span><strong>supporter</strong><span id="mode">随写助手</span></div><span class="escape">esc <span>关闭</span></span></header>
+  <div id="content">
+  <section id="context" hidden><div class="section-label" id="scope">将替换原文</div><pre id="original"></pre></section>
+  <section id="conversation" hidden aria-label="对话记录"></section>
+  <section id="process" hidden><div id="processTitle">执行过程</div><ol id="steps"></ol></section>
+  <section id="result" hidden><div class="section-label"><span id="resultTitle">待替换结果</span><span id="choiceHint">Tab 确认后替换原文</span></div><div id="branches" role="listbox" aria-label="候选分支" hidden></div><pre id="candidate"></pre></section>
+  </div>
+  <div class="compose"><span class="prompt-icon">↳</span><textarea id="prompt" rows="1" placeholder="想在这里写些什么？" autofocus spellcheck="false"></textarea><span id="sendHint"><kbd>↵</kbd></span></div>
+  <section id="completion" hidden aria-live="polite"><div><span class="completion-dot">◈</span><span id="completionCheck"></span></div><details id="completionDetails"><summary>补全来源与范围</summary><p id="completionSource"></p><p>依据内置公开文档目录补全；不执行输入、不检测远端安装状态。路径、自定义别名及未收录命令可继续手动填写。</p></details></section>
+  <section id="menu" hidden><div id="menuTitle"></div><div id="options" role="listbox"></div></section>
+  <p id="status" hidden></p>
+  <footer><div class="chips"><button id="backend" title="Ctrl+B">检测中</button><span class="dot">/</span><button id="model" title="Ctrl+M">默认模型</button><button id="effort" title="Ctrl+R">◉ 默认</button><button id="environment" title="/env:环境">auto</button></div><span id="hint"><kbd>/</kbd> 命令</span></footer>
+  <div id="busy" hidden><span></span><span></span><span></span><span class="busy-label">正在思考 · Ctrl+C 停止 · Esc 关闭上下文</span></div>
+</main><script src="command-data.js"></script><script src="completion.js"></script><script src="renderer.js"></script></body></html>

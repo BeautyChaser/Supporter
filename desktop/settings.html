@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'"><title>Supporter 设置</title><link rel="stylesheet" href="settings.css"></head><body>
+<div class="settings-titlebar"><span>Supporter 设置</span><button id="windowClose" type="button" aria-label="关闭设置">×</button></div><aside><div class="logo">✦ <strong>supporter</strong></div><span class="sub">偏好设置</span><nav><button data-page="appearance" class="active">◐　外观</button><button data-page="general">⌨　唤醒与输入</button><button data-page="ai">✦　AI 与模型</button><button data-page="about">ⓘ　关于与帮助</button></nav><small>为当前输入，提供恰当的帮助。</small></aside>
+<main><form id="form">
+<section data-panel="appearance"><h1>外观</h1><p class="intro">让助手融入你的桌面。外观可即时预览，保存后生效。</p>
+<div class="setting"><div><label for="theme">主题模式</label><p>跟随系统，或固定浅色、深色。</p></div><select id="theme"><option value="system">跟随系统</option><option value="dark">深色</option><option value="light">浅色</option></select></div>
+<div class="setting"><div><label>主题色</label><p>用于标识、状态与强调。</p></div><div id="colors" role="group" aria-label="主题色"></div></div>
+<div class="setting"><div><label for="fontSize">输入字号</label><p>调整输入区文字大小。</p></div><select id="fontSize"><option value="12">12 px</option><option value="14">14 px</option><option value="16">16 px</option><option value="18">18 px</option></select></div>
+<div class="setting"><div><label for="width">浮层宽度</label><p>使用逻辑像素，自动适配系统缩放。</p></div><select id="width"><option value="440">紧凑 · 440</option><option value="520">标准 · 520</option><option value="640">宽敞 · 640</option><option value="760">加宽 · 760</option></select></div>
+<div class="setting"><div><label for="opacity">窗口不透明度</label><p>保留文字可读性。</p></div><div><input id="opacity" type="range" min="80" max="100" step="1"><output id="opacityValue"></output></div></div>
+<div class="setting"><div><label for="radius">圆角</label><p>调整浮层轮廓。</p></div><select id="radius"><option value="8">轻圆角</option><option value="16">标准圆角</option><option value="24">大圆角</option></select></div>
+<div class="setting"><div><label for="showProcess">展示执行过程</label><p>显示 CLI 阶段、耗时与校验状态。</p></div><input id="showProcess" type="checkbox"></div>
+<div class="setting"><div><label for="motion">平滑动效</label><p>柔和展开、过渡与候选切换。</p></div><input id="motion" type="checkbox"></div>
+<div class="setting"><div><label for="glass">毛玻璃背景</label><p>系统支持时使用 Acrylic 模糊；文字保持清晰。</p></div><input id="glass" type="checkbox"></div>
+<div class="setting"><div><label for="glassOpacity">毛玻璃背景浓度</label><p>只调整背景遮罩，不降低文字透明度。</p></div><div><input id="glassOpacity" type="range" min="50" max="96" step="1"><output id="glassOpacityValue"></output></div></div>
+<div id="sample"><div class="sample-brand">✦　supporter <span>随写助手</span></div><div class="sample-input">↳　想在这里写些什么？</div><div class="sample-bottom">codex / 模型　　◉ 推理强度 <span>/ 命令</span></div></div>
+</section>
+<section data-panel="general" hidden><h1>唤醒与输入</h1><p class="intro">一次快捷键，继续当前编辑。</p>
+<div class="setting"><div><label for="hotkey">全局唤醒快捷键</label><p>默认 Ctrl+Space；若与输入法冲突，可改用组合键。</p></div><input id="hotkey" type="text" placeholder="Control+Space"></div>
+<div class="setting"><div><label for="autoStart">登录 Windows 后启动</label><p>只在你保存此选项时更改开机启动。</p></div><input id="autoStart" type="checkbox"></div>
+<div class="note">主窗口平时隐藏在托盘。右键托盘可进入设置或退出。<br>输入位置上方优先显示；无法读取坐标时会提示。<br>Tab 替换选区或当前输入框，接受前校验原文。<br>终端只填入命令，不自动发送回车。</div>
+<h2>全键盘操作</h2><div class="note">Enter 发送 · Shift+Enter 换行 · Tab 接受<br>Ctrl+B 后端 · Ctrl+M 模型 · Ctrl+R 推理<br>Ctrl+T 终端 · Ctrl+, 设置 · Esc 取消</div>
+</section>
+<section data-panel="ai" hidden><h1>AI 与模型</h1><p class="intro">使用本机 CLI 的账号与配置，不在这里收集密钥。</p>
+<div class="setting"><div><label for="backend">默认 CLI</label><p>仅可选择已安装且可启动的后端。</p></div><select id="backend"></select></div>
+<div class="setting"><div><label for="model">模型</label><p>目录与缓存不代表账号调用权限。</p></div><select id="model"></select></div>
+<div class="setting"><div><label for="reasoning">推理强度</label><p>按后端与模型分别保存；Luna 快速补写推荐低档。“默认”继承 CLI 配置。</p></div><select id="reasoning"></select></div>
+<div class="setting"><div><label for="codexConnection">Codex 连接</label><p>仅影响 Supporter 的 Codex 请求，下次请求生效。</p></div><select id="codexConnection"><option value="inherit">跟随启动环境</option><option value="direct">直连</option><option value="proxy">指定代理</option></select></div>
+<div class="setting" id="codexProxyRow" hidden><div><label for="codexProxy">代理地址</label><p>使用你已有的 HTTP(S) 代理，不修改系统代理。</p></div><input id="codexProxy" type="text" placeholder="http://127.0.0.1:8080" autocomplete="off" spellcheck="false"></div>
+<div class="note" id="modelSource"></div><button type="button" id="refresh">重新检测 CLI 与模型</button><div id="cliStatus"></div>
+</section>
+<section data-panel="about" hidden><h1>关于 Supporter</h1><p class="intro">光标旁的对话与编辑助手。</p><div class="note">1. 在目标输入框按唤醒快捷键。<br>2. 确认浮层显示的原文范围。<br>3. 与 AI 对话，查看独立的待替换结果和执行过程。<br>4. Tab 接受替换，Esc 取消。<br><br>输入 / 查看命令补全。<br>不是所有应用都提供可读的光标或输入范围，无法识别时将停止替换。<br><br>界面使用 Electron，后台使用本机 CLI。<br>设置按 zTools 的分类式偏好面板思路组织，本项目独立实现。</div></section>
+</form><footer><span id="feedback">更改后请保存</span><button id="cancel" type="button">取消</button><button id="save" class="primary" type="button">保存更改</button></footer></main><script src="settings.js"></script></body></html>

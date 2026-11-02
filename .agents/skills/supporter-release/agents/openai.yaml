@@ -1,0 +1,4 @@
+interface:
+  display_name: "Supporter Release"
+  short_description: "Build and audit distributable Windows releases"
+  default_prompt: "Use $supporter-release to prepare and validate a Supporter release."

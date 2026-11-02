@@ -1,0 +1,9 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'"><meta name="viewport" content="width=device-width,initial-scale=1"><title>欢迎使用 Supporter</title><link rel="stylesheet" href="onboarding.css"></head><body>
+<header><div>✦ <strong>supporter</strong><span>开始使用</span></div><button id="welcomeClose" aria-label="关闭引导">×</button></header>
+<main><section class="intro"><span class="eyebrow">在光标旁，继续思考</span><h1>按一下快捷键，<br>把想法写进当前位置。</h1><p>写作、代码、终端命令。全键盘完成，回复和可填入的结果分别呈现。</p><div class="key-demo"><kbd>Ctrl</kbd><span>+</span><kbd>Space</kbd></div><ol><li>在输入位置唤醒</li><li>说出要求，查看候选</li><li>按 Tab 接受，Esc 关闭上下文</li></ol><small>Supporter 已内置运行环境，无需另装 Python 或 Node。</small></section>
+<section class="setup"><h2>连接你的 AI 工具</h2><p class="sub">使用本机已安装 CLI 的账号与模型。开始对话前，需要安装并登录其中一个后端。</p>
+<div id="welcomeDetection" role="status">正在检测本机环境…</div><div id="welcomeTools"></div>
+<div class="actions"><button id="welcomeRefresh">重新检测 <kbd>F5</kbd></button><button id="welcomeGuide">安装与登录说明 ↗</button></div>
+<form id="welcomeForm"><label for="welcomeBackend">后端</label><select id="welcomeBackend"></select><label for="welcomeModel">模型</label><select id="welcomeModel"></select><label for="welcomeReasoning">推理强度</label><select id="welcomeReasoning"></select><label for="welcomeHotkey">唤醒快捷键</label><input id="welcomeHotkey" value="Control+Space" autocomplete="off"><p class="small">若与输入法冲突，可改用 Control+Alt+Space。以后可按 Ctrl+, 调整外观、连接与模型。</p></form>
+<p id="welcomeFeedback" role="status"></p></section></main>
+<footer><span>设置仅保存在当前用户的电脑上</span><button id="welcomeLater">稍后配置</button><button id="welcomeFinish" class="primary">开始使用 →</button></footer><script src="onboarding.js"></script></body></html>

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "hermes",
+  "label": "Hermes",
+  "adapter": "hermes",
+  "priority": 30,
+  "detect": {"commands": ["hermes", "hermes.exe", "hermes.cmd"], "versionArgs": ["--version"]}
+}

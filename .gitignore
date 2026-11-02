@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+settings.json
+!defaults/settings.json
+.runtime/
+node_modules/
+.vendor/
+.build-cache/
+release/
+dist/
+build/payload/
+build/native/
+completions/user/*.json
+*.log
+*.zip
+*.exe
+!build/icon.ico

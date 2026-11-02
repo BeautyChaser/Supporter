@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "my-agent",
+  "label": "我的 CLI（请按真实协议修改）",
+  "adapter": "generic",
+  "detect": {"commands": ["my-agent.exe"], "versionArgs": ["--version"]},
+  "models": {"args": ["models"], "format": "lines"},
+  "reasoning": {"*": ["low", "medium"]},
+  "generate": {
+    "args": ["chat", "--oneshot", "--no-tools"],
+    "modelArgs": ["--model", "{model}"],
+    "reasoningArgs": ["--reasoning", "{reasoning}"],
+    "stdin": "prompt",
+    "output": {"format": "text"}
+  }
+}

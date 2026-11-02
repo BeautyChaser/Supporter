@@ -1,0 +1,4 @@
+interface:
+  display_name: "Supporter Backend Plugin"
+  short_description: "Add and test self-detecting CLI backend plugins"
+  default_prompt: "Use $supporter-backend-plugin to add a backend and verify its lifecycle."

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "opencode",
+  "label": "OpenCode",
+  "adapter": "opencode",
+  "priority": 20,
+  "detect": {"commands": ["opencode.exe", "opencode", "opencode.cmd"], "versionArgs": ["--version"]}
+}
