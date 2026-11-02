@@ -4,6 +4,7 @@ Use Windows x64, Node.js 22.12+, Python 3.11+ and Windows PowerShell.
 
 ```powershell
 npm ci
+node node_modules/electron/install.js
 python -m pip install --target .vendor -r requirements.txt
 New-Item -ItemType Directory -Force .runtime
 powershell -NoProfile -ExecutionPolicy Bypass -File build-native.ps1
