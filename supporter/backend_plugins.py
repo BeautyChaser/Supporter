@@ -180,4 +180,5 @@ def generate(backend,ctx,*args,**kwargs):
 
 def invalidate():
     with _lock:
-        for key,(signature,_,backend) in list(_cache.items()):_cache[key]=(signature,0,backend)
+        # A new machine can have a monotonic clock below MODEL_TTL.
+        for key,(signature,_,backend) in list(_cache.items()):_cache[key]=(signature,float('-inf'),backend)

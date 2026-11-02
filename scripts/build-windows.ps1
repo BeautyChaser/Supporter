@@ -3,6 +3,8 @@ $ErrorActionPreference='Stop'
 $taskRoot=Split-Path -Parent $PSScriptRoot
 Push-Location -LiteralPath $taskRoot
 try {
+    node node_modules/electron/install.js
+    if ($LASTEXITCODE -ne 0) { throw 'Electron runtime installation failed.' }
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $taskRoot 'build-native.ps1')
     if ($LASTEXITCODE -ne 0) { throw 'Native helper compilation failed.' }
     python -m pip download --no-deps --only-binary=:all: --dest .build-cache -r requirements.txt
