@@ -614,13 +614,14 @@ app.whenReady().then(async()=>{
         await returnFromSettings(true);assert.equal(inventory.settings.appearance.theme,'light');assert.equal(inventory.settings.appearance.fontSize,18);assert.deepEqual(inventory.settings.codexConnection,{mode:'proxy',proxyUrl:'http://127.0.0.1:17780'});assert.equal(inventory.settings.models.codex,'gpt-6-luna');assert.equal(inventory.settings.reasoning['codex|gpt-6-luna'],'high');
       }finally{if(win.webContents.getURL().endsWith('settings.html'))await returnFromSettings();await publishInventory(baseline.backends,baseline.settings);}
     });
-    await test('glass controls preview the native switch and cancellation restores saved appearance',async()=>{
+    await test('glass settings preview native Acrylic and cancellation restores the rounded assistant surface',async()=>{
       await clear();const saved={...inventory.settings.appearance,opacity:1,glass:true,glassOpacity:.8};await installSettings({...inventory.settings,appearance:saved});await showSettingsPage();
       assert.equal(await run('document.getElementById("glass").checked'),true);assert.equal(await run('document.getElementById("glassOpacity").min'),'50');assert.equal(await run('document.getElementById("glassOpacity").max'),'96');assert.equal(await run('document.getElementById("glassOpacity").value'),'80');
+      if(hostGlassApi)assert.equal(glassCalls.at(-1),'acrylic');
       const calls=glassCalls.length;await run('document.getElementById("glass").checked=false;document.getElementById("glass").dispatchEvent(new Event("input",{bubbles:true}))');await sleep(50);
       assert.equal(await run('document.documentElement.dataset.glass'),'false');assert.equal(await run('document.documentElement.style.getPropertyValue("--surface-opacity")'),'1');assert.equal(win.getOpacity(),1);
       if(hostGlassApi)assert.ok(glassCalls.slice(calls).includes('none'),'native acrylic must be disabled during preview');
-      await returnFromSettings();assert.equal(await run('document.documentElement.dataset.glass'),'true');assert.deepEqual(inventory.settings.appearance,saved);if(hostGlassApi)assert.equal(glassCalls.at(-1),'acrylic');
+      await returnFromSettings();assert.equal(await run('document.documentElement.dataset.glass'),'true');assert.deepEqual(inventory.settings.appearance,saved);if(hostGlassApi)assert.equal(glassCalls.at(-1),'none');
     });
     await test('glass concentration previews background alpha without fading text and saves the chosen value',async()=>{
       await clear();await installSettings({...inventory.settings,appearance:{...inventory.settings.appearance,opacity:1,glass:true,glassOpacity:.8}});await showSettingsPage();await run('window.supporter.onEvent(event=>{if(event.type==="appearance")window.__lastAppearance=event});void 0');
@@ -629,7 +630,10 @@ app.whenReady().then(async()=>{
         const state=await run('({native:window.__lastAppearance.glassNative,alpha:Number(document.documentElement.style.getPropertyValue("--surface-opacity")),sampleOpacity:getComputedStyle(document.getElementById("sample")).opacity,bodyOpacity:getComputedStyle(document.body).opacity,rootOpacity:getComputedStyle(document.documentElement).opacity})');
         assert.equal(state.alpha,state.native?percent/100:Math.max(.9,percent/100));assert.equal(await read('glassOpacityValue'),percent+'%');assert.equal(state.sampleOpacity,'1');assert.equal(state.bodyOpacity,'1');assert.equal(state.rootOpacity,'1');assert.equal(win.getOpacity(),1);
       }
-      await returnFromSettings(true);assert.equal(inventory.settings.appearance.glass,true);assert.equal(inventory.settings.appearance.glassOpacity,.73);assert.equal(await run('getComputedStyle(document.getElementById("prompt")).opacity'),'1');assert.equal(await run('getComputedStyle(document.getElementById("card")).opacity'),'1');
+      await returnFromSettings(true);assert.equal(inventory.settings.appearance.glass,true);assert.equal(inventory.settings.appearance.glassOpacity,.73);
+      if(hostGlassApi)assert.equal(glassCalls.at(-1),'none','Acrylic must be cleared before showing the rounded assistant');
+      assert.equal(await run('document.documentElement.style.getPropertyValue("--surface-opacity")'),'0.73');
+      assert.equal(await run('getComputedStyle(document.getElementById("prompt")).opacity'),'1');assert.equal(await run('getComputedStyle(document.getElementById("card")).opacity'),'1');
     });
     await test('glass and concentration persist on reopen and disabled glass restores the ordinary surface',async()=>{
       await clear();await installSettings({...inventory.settings,appearance:{...inventory.settings.appearance,opacity:1,glass:true,glassOpacity:.73}});await showSettingsPage();assert.equal(await run('document.getElementById("glass").checked'),true);assert.equal(await run('document.getElementById("glassOpacity").value'),'73');

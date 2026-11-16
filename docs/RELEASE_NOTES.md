@@ -1,15 +1,6 @@
-Windows x64 可安装发行版，包含 v0.3.1 维护修复。
+Supporter v0.3.2 · Windows x64
 
-- 修复系统刚启动时，手动刷新可能仍复用旧后端目录的问题。
-- 修复干净源码环境下 Electron 运行文件未下载导致测试/构建失败的问题。
+- 修复浮窗边缘的矩形底色。浮窗使用可调浓度的圆角半透明背景。
+- 设置和首次启动向导在 Windows 11 22H2 及更新版本继续使用系统 Acrylic。返回浮窗时恢复透明边缘。
 
-- 安装包与 ZIP 自带 Electron、Python、COM 和原生输入组件，无需使用者另装 Node/Python。
-- 首次环境检测与配置向导；独立用户设置、插件与本地补全习惯。
-- Ctrl+Space 唤醒，Tab 接受；多轮对话、独立候选、多行和终端复制/写回。
-- 自检测可插拔 Codex/OpenCode/Hermes 后端、模型与推理档位。
-- 环境命令补全、个人补全目录、输入区定位、托盘及毛玻璃外观。
-- AGENTS.md、.agents/skills 与独立测试/审查角色，附可重复构建和验证流程。
-
-AI 对话仍需用户自行安装并登录后端 CLI。安装程序目前未做代码签名，Windows 可能显示未知发布者提示。Windows 11 22H2+ 支持系统 Acrylic；其他系统使用清晰的半透明回退。特殊编辑器、TUI 或无法可靠读取的目标可能需要 Ctrl+V 复制回退。
-
-下载 Setup 安装，或解压 ZIP 运行 Supporter.exe。SHA256SUMS.txt 提供文件校验值。
+下载 Setup 安装，或解压 ZIP 运行 Supporter.exe。安装程序未签名，Windows 可能显示未知发布者提示。SHA256SUMS.txt 提供下载校验值。

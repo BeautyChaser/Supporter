@@ -286,7 +286,10 @@ window.supporter.onEvent(event=>{
   if(event.type==='appearance'){
     const a=event.appearance||{};motion=a.motion!==false;
     document.documentElement.dataset.theme=a.theme==='system'?(event.systemDark?'dark':'light'):(a.theme||'dark');
-    document.documentElement.dataset.glass=String(a.glass!==false);document.documentElement.style.setProperty('--surface-opacity',String(a.glass!==false?(event.glassNative?Math.max(.5,Math.min(.96,Number(a.glassOpacity)||.8)):Math.max(.9,Number(a.glassOpacity)||.8)):1));
+    const glassEnabled=a.glass!==false;
+    const surfaceOpacity=glassEnabled?Math.max(.5,Math.min(.96,Number(a.glassOpacity)||.8)):1;
+    document.documentElement.dataset.glass=String(glassEnabled);
+    document.documentElement.style.setProperty('--surface-opacity',String(surfaceOpacity));
     document.documentElement.style.setProperty('--accent',a.accent||'#b9b5ff');document.documentElement.style.setProperty('--editor-size',(a.fontSize||14)+'px');document.documentElement.style.setProperty('--radius',(a.radius||16)+'px');
     document.documentElement.classList.toggle('hide-process',a.showProcess===false);document.documentElement.classList.toggle('no-motion',!motion);fit();
   }

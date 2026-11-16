@@ -1,13 +1,13 @@
 const os=require('node:os');
 const materials=new WeakMap();
-function applyGlass(window,appearance={},platform=process.platform,release=os.release()){
+function applyGlass(window,appearance={},allowNative=true){
   const enabled=appearance.glass!==false;
   const opacity=Math.max(.5,Math.min(.96,Number(appearance.glassOpacity)||.8));
-  const build=Number(String(release).split('.')[2]||0);
+  const build=Number(os.release().split('.')[2]||0);
   let native=false;
-  if(platform==='win32'&&build>=22621&&typeof window.setBackgroundMaterial==='function'){
-    const material=enabled?'acrylic':'none';
-    try{if(materials.get(window)!==material){window.setBackgroundMaterial(material);materials.set(window,material);}native=enabled;}
+  if(process.platform==='win32'&&build>=22621&&typeof window.setBackgroundMaterial==='function'){
+    const material=enabled&&allowNative?'acrylic':'none';
+    try{if(materials.get(window)!==material){window.setBackgroundMaterial(material);materials.set(window,material);}native=material==='acrylic';}
     catch{materials.delete(window);}
   }
   window.setBackgroundColor('#00000000');

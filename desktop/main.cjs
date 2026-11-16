@@ -106,7 +106,8 @@ else app.whenReady().then(()=>{
   function applyAppearance(appearance){
     if(!win||win.isDestroyed())return;
     currentAppearance=appearance;
-    glassState=applyGlass(win,appearance);
+    // Windows applies Acrylic to the full window, including the floating card's transparent margins.
+    glassState=applyGlass(win,appearance,viewMode!=='assistant');
     send({type:'appearance',appearance,systemDark:nativeTheme.shouldUseDarkColors,glassNative:glassState.native});
     if(viewMode!=='assistant'){win.setOpacity(1);return;}
     win.setOpacity(Math.max(.8,Math.min(1,Number(appearance.opacity)||1)));
@@ -199,7 +200,8 @@ else app.whenReady().then(()=>{
         inventory=[{name:'codex',version:'codex-cli',error:'',models:['gpt-6.1-sol'],reasoning:{'gpt-6.1-sol':['low','medium','high','xhigh']}}];
         win.setBounds({x:120,y:100,width:850,height:650});
         win.loadFile(path.join(__dirname,'settings.html')).then(()=>{
-          send({type:'settings-data',settings,backends:inventory});win.show();win.focus();
+          viewMode='settings';
+          send({type:'settings-data',settings,backends:inventory});applyAppearance(settings.appearance||{});win.show();win.focus();
           setTimeout(async()=>{try{const img=await win.webContents.capturePage();fs.writeFileSync(path.join(runtimePaths.runtimeRoot,'settings-preview.png'),img.toPNG());}catch(error){fs.appendFileSync(path.join(runtimePaths.runtimeRoot,'main-error.log'),String(error.stack||error));}app.quit();},1500);
         });
         return;
