@@ -179,10 +179,15 @@ class CodexRuntimeTests(unittest.TestCase):
         self.assertTrue(any(m.get('method')=='turn/interrupt' for m in self.messages))
 
     def test_cancel_turn_then_new_request_still_works(self):
-        cancel=threading.Event();timer=threading.Timer(.15,cancel.set);timer.start()
+        cancel=threading.Event()
+
+        def cancel_after_submission(message):
+            if message.startswith('Codex 请求已提交'):
+                cancel.set()
+
         with self.assertRaisesRegex(CodexRuntimeError,'取消'):
-            self.runtime.generate('gpt-6-luna','wait',cancel)
-        timer.join()
+            self.runtime.generate('gpt-6-luna','wait',cancel,progress=cancel_after_submission,timeout=5)
+        self.assertTrue(any(message.get('method')=='turn/interrupt' for message in self.messages))
         self.assertIn('line one',self.runtime.generate('gpt-6-luna','hello',threading.Event()))
         self.assertEqual(len(self.spawns),1)
 
